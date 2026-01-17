@@ -1,6 +1,6 @@
 variable "location" {
   type    = string
-  default = "Central India"
+  default = "North Europe"
 }
 
 variable "resource_group_name" {
@@ -11,7 +11,7 @@ variable "resource_group_name" {
 
 variable "vm_size" {
   type    = string
-  default = "Standard_B2s"
+  default = "Standard_DC1s_v3"
 }
 
 variable "admin_username" {
