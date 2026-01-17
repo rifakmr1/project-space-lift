@@ -5,7 +5,7 @@ variable "location" {
 
 variable "resource_group_name" {
   description = "The name of the resource group"
-  default     = "rg-cd-spacelift-ic"
+  default     = "rg-cicd-spacelift-ic"
 }
 
 
