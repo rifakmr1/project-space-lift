@@ -3,11 +3,6 @@ variable "location" {
   default = "East US"
 }
 
-variable "resource_group_name" {
-  type = string
-  default = azure-rg
-}
-
 variable "vm_size" {
   type    = string
   default = "Standard_B2s"
