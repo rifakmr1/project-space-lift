@@ -5,6 +5,7 @@ variable "location" {
 
 variable "resource_group_name" {
   type = string
+  default = azure-rg
 }
 
 variable "vm_size" {
