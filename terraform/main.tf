@@ -13,8 +13,6 @@ terraform {
       source = "hashicorp/random"
     }
   }
-
-  backend "remote" {}
 }
 
 provider "azurerm" {
