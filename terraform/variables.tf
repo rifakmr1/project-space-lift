@@ -3,7 +3,11 @@ variable "location" {
   default = "East US"
 }
 
-variable "resource_group_name" {}
+variable "resource_group_name" {
+  description = "The name of the resource group"
+  default     = "default-resource-group-name"
+}
+
 
 variable "vm_size" {
   type    = string
@@ -12,5 +16,5 @@ variable "vm_size" {
 
 variable "admin_username" {
   type    = string
-  default = "azureuser"
+  default = "rifak"
 }
