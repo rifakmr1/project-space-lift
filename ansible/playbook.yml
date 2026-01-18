@@ -1,12 +1,23 @@
----
 - name: Configure Apache on Ubuntu EC2
   hosts: all
   become: yes
+  # 1. Disable fact gathering at start to avoid early timeout
+  gather_facts: no 
   vars:
     apache_pkg: apache2
     web_root: /var/www/html
 
   tasks:
+    # 2. Add a wait task to ensure the server is actually reachable
+    - name: Wait for SSH to become available
+      ansible.builtin.wait_for_connection:
+        timeout: 300
+        delay: 5
+
+    # 3. Manually gather facts now that the connection is confirmed
+    - name: Gather facts for the first time
+      ansible.builtin.setup:
+
     - name: Update APT cache
       apt:
         update_cache: yes
@@ -22,7 +33,7 @@
         name: "{{ apache_pkg }}"
         state: started
         enabled: yes
-      when: not ansible_check_mode  # Skip this task when in check mode
+      when: not ansible_check_mode
 
     - name: Deploy custom index.html
       copy:
@@ -32,7 +43,7 @@
           <html>
           <body>
             <h1>Hello from Ansible!</h1>
-            <p>Deployed via Spacelift</p>
+            <p>Deployed via rifakmr-Spacelift</p>
           </body>
           </html>
       notify: Reload Apache
@@ -42,4 +53,4 @@
       service:
         name: "{{ apache_pkg }}"
         state: reloaded
-      when: not ansible_check_mode  # Also skip the handler when in check mode
+      when: not ansible_check_mode
